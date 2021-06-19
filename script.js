@@ -28,4 +28,19 @@ window.addEventListener("DOMContentLoaded", (event) => {
     option.innerHTML = i < 10 ? "0" + i : i;
     seconds.appendChild(option);
   }
+
+  //   showing current time
+  setInterval(getCurrentTime, 1000);
 });
+
+// Get current time
+function getCurrentTime() {
+  let time = new Date();
+  time = time.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: true,
+  });
+  currentTime.innerHTML = time;
+}
