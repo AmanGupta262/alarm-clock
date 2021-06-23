@@ -13,13 +13,13 @@ const alarms = [];
 // Populating select oprtion on document load
 window.addEventListener("DOMContentLoaded", (event) => {
   // Populating hours
-  populate(1, 12, hours)
+  populate(1, 12, hours);
 
   // Populating minutes
-  populate(0, 59, minutes)
+  populate(0, 59, minutes);
 
   // Populating seconds
-  populate(0, 59, seconds)
+  populate(0, 59, seconds);
 
   // Showing current time
   setInterval(getCurrentTime, 1000);
@@ -28,15 +28,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
 // Add event listener to set alarm button
 setAlarmBtn.addEventListener("click", getInput);
 
-
-// Populate options 
-function populate(start, end, element){
-    for(let i=start; i<=end; i++){
-        const option = document.createElement("option");
-        option.value = i < 10 ? "0" + i : i;
-        option.innerHTML = i < 10 ? "0" + i : i;
-        element.appendChild(option);
-    }
+// Populate options
+function populate(start, end, element) {
+  for (let i = start; i <= end; i++) {
+    const option = document.createElement("option");
+    option.value = i < 10 ? "0" + i : i;
+    option.innerHTML = i < 10 ? "0" + i : i;
+    element.appendChild(option);
+  }
 }
 
 // Get current time
@@ -76,19 +75,20 @@ function convertToTime(hour, minute, second, amPm) {
 }
 
 // Set Alarm
-function setAlarm(time){
-    const alarm = setInterval(() => {
-        if(time === getCurrentTime()){
-            alert("Alarm Ringing");
-        }
-        console.log("running");
-    },1000)
-    alarmsInterval.push(alarm);
-    addAlaramToDom(time, alarm);
+function setAlarm(time) {
+  const alarm = setInterval(() => {
+    if (time === getCurrentTime()) {
+      alert("Alarm Ringing");
+    }
+    console.log("running");
+  }, 1000);
+  alarmsInterval.push(alarm);
+  addAlaramToDom(time, alarm);
+  saveAlarm(time);
 }
 
 // Displaying created alarms in HTML
-function addAlaramToDom(time, intervalId){
+function addAlaramToDom(time, intervalId) {
   const alarm = document.createElement("div");
   alarm.classList.add("alarm");
   alarm.innerHTML = `
@@ -97,4 +97,15 @@ function addAlaramToDom(time, intervalId){
               `;
 
   alrarmContainer.prepend(alarm);
+}
+
+// save alarm to local storage
+function saveAlarm(time) {
+  const isPresent = localStorage.getItem("alarms");
+  let alarms = [];
+
+  if (isPresent) alarms = JSON.parse(isPresent);
+
+  alarms.push(time);
+  localStorage.setItem("alarms", JSON.stringify(alarms));
 }
