@@ -84,4 +84,17 @@ function setAlarm(time){
         console.log("running");
     },1000)
     alarmsInterval.push(alarm);
+    addAlaramToDom(time, alarm);
+}
+
+// Displaying created alarms in HTML
+function addAlaramToDom(time, intervalId){
+  const alarm = document.createElement("div");
+  alarm.classList.add("alarm");
+  alarm.innerHTML = `
+              <div class="time">${time}</div>
+              <div class="btn detlete-alarm" data-id=${intervalId}>Delete</div>
+              `;
+
+  alrarmContainer.prepend(alarm);
 }
