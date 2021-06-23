@@ -5,6 +5,10 @@ const minutes = document.querySelector("#minutes");
 const seconds = document.querySelector("#seconds");
 const amPm = document.querySelector("#am-pm");
 const setAlarmBtn = document.querySelector("#submit-btn");
+const alrarmContainer = document.querySelector(".alarms-container");
+
+const alarmsInterval = [];
+const alarms = [];
 
 // Populating select oprtion on document load
 window.addEventListener("DOMContentLoaded", (event) => {
@@ -77,5 +81,7 @@ function setAlarm(time){
         if(time === getCurrentTime()){
             alert("Alarm Ringing");
         }
+        console.log("running");
     },1000)
+    alarmsInterval.push(alarm);
 }
