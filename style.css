@@ -20,7 +20,7 @@ body {
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 5px;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 select {
   appearance: none;
@@ -71,8 +71,7 @@ select {
 }
 
 .submit-btn {
-  box-shadow: #c3d3e3 2px 2px 2px 1px, 
-              #fff -2px -2px 10px 1px;
+  box-shadow: #c3d3e3 2px 2px 2px 1px, #fff -2px -2px 10px 1px;
 }
 
 .alarms {
@@ -80,28 +79,27 @@ select {
 }
 
 .alarms .title {
+  color: #32476b;
   font-weight: bold;
 }
 
 .alarm {
   justify-content: space-between;
-  border-radius: 5px;
-  padding: 0.5rem;
+  border-radius: 30px;
+  padding: 0.5rem 1rem;
   align-items: center;
-    box-shadow: #c3d3e3 2px 2px 2px 1px inset, #fff -2px -2px 10px 1px inset;
-
+  box-shadow: #c3d3e3 2px 2px 2px 1px inset, #fff -2px -2px 10px 1px inset;
 }
 .alarm .delete-alarm {
-  box-shadow: #c3d3e3 2px 2px 2px 1px, 
-              #fff -2px -2px 10px 1px;
+  box-shadow: #c3d3e3 2px 2px 2px 1px, #fff -2px -2px 10px 1px;
 }
 
-.time{
-    color: #32476b;
-    font-size: .8rem;
-    font-weight: bold;
+.time {
+  color: #32476b;
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 .btn:focus,
-.btn:hover{
+.btn:hover {
   box-shadow: #c3d3e3 2px 2px 2px 1px inset, #fff -2px -2px 10px 1px inset;
 }
