@@ -76,7 +76,7 @@ function convertToTime(hour, minute, second, amPm) {
 }
 
 // Set Alarm
-function setAlarm(time, fetching=false) {
+function setAlarm(time, fetching = false) {
   const alarm = setInterval(() => {
     if (time === getCurrentTime()) {
       alert("Alarm Ringing");
@@ -85,8 +85,8 @@ function setAlarm(time, fetching=false) {
   }, 1000);
   alarmsInterval.push(alarm);
 
-  if(!fetching){
-    addAlaramToDom(time, alarm);
+  addAlaramToDom(time, alarm);
+  if (!fetching) {
     saveAlarm(time);
   }
 }
@@ -97,8 +97,10 @@ function addAlaramToDom(time, intervalId) {
   alarm.classList.add("alarm");
   alarm.innerHTML = `
               <div class="time">${time}</div>
-              <div class="btn detlete-alarm" data-id=${intervalId}>Delete</div>
+              <button class="btn delete-alarm" data-id=${intervalId}>Delete</button>
               `;
+  const deleteBtn = alarm.querySelector(".delete-alarm");
+  deleteBtn.addEventListener("click", deleteAlarm);
 
   alrarmContainer.prepend(alarm);
 }
@@ -114,7 +116,7 @@ function checkAlarams() {
 
 // save alarm to local storage
 function saveAlarm(time) {
-  const alarms = checkAlarams();  
+  const alarms = checkAlarams();
 
   alarms.push(time);
   localStorage.setItem("alarms", JSON.stringify(alarms));
@@ -124,8 +126,18 @@ function saveAlarm(time) {
 function fetchAlarm() {
   const alarms = checkAlarams();
 
-  alarms.forEach(time => {
-    addAlaramToDom(time);
+  alarms.forEach((time) => {
     setAlarm(time, true);
   });
+}
+
+// Delete a Alarm
+function deleteAlarm(event) {
+  const self = event.target;
+  const intervalId = parseInt(self.getAttribute("data-id"));
+  
+  clearInterval(intervalId);
+  
+  const alarm = self.parentElement;
+  alarm.remove();
 }
