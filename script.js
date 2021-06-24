@@ -7,9 +7,6 @@ const amPm = document.querySelector("#am-pm");
 const setAlarmBtn = document.querySelector("#submit-btn");
 const alrarmContainer = document.querySelector(".alarms-container");
 
-const alarmsInterval = [];
-const alarms = [];
-
 // Populating select oprtion on document load
 window.addEventListener("DOMContentLoaded", (event) => {
   // Populating hours
@@ -82,8 +79,7 @@ function setAlarm(time, fetching = false) {
       alert("Alarm Ringing");
     }
     console.log("running");
-  }, 1000);
-  alarmsInterval.push(alarm);
+  }, 500);
 
   addAlaramToDom(time, alarm);
   if (!fetching) {
@@ -100,7 +96,7 @@ function addAlaramToDom(time, intervalId) {
               <button class="btn delete-alarm" data-id=${intervalId}>Delete</button>
               `;
   const deleteBtn = alarm.querySelector(".delete-alarm");
-  deleteBtn.addEventListener("click", deleteAlarm);
+  deleteBtn.addEventListener("click", (e) => deleteAlarm(e, time, intervalId));
 
   alrarmContainer.prepend(alarm);
 }
@@ -132,12 +128,22 @@ function fetchAlarm() {
 }
 
 // Delete a Alarm
-function deleteAlarm(event) {
+function deleteAlarm(event, time, intervalId) {
   const self = event.target;
-  const intervalId = parseInt(self.getAttribute("data-id"));
   
   clearInterval(intervalId);
-  
+
   const alarm = self.parentElement;
+  console.log(time)
+
+  deleteAlarmFromLocal(time)
   alarm.remove();
+}
+
+function deleteAlarmFromLocal(time){
+  const alarms = checkAlarams();
+
+  const index = alarms.indexOf(time);
+  alarms.splice(index, 1);
+  localStorage.setItem("alarms", JSON.stringify(alarms));
 }
