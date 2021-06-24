@@ -23,6 +23,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   // Showing current time
   setInterval(getCurrentTime, 1000);
+  fetchAlarm();
 });
 
 // Add event listener to set alarm button
@@ -75,7 +76,7 @@ function convertToTime(hour, minute, second, amPm) {
 }
 
 // Set Alarm
-function setAlarm(time) {
+function setAlarm(time, fetching=false) {
   const alarm = setInterval(() => {
     if (time === getCurrentTime()) {
       alert("Alarm Ringing");
@@ -83,8 +84,11 @@ function setAlarm(time) {
     console.log("running");
   }, 1000);
   alarmsInterval.push(alarm);
-  addAlaramToDom(time, alarm);
-  saveAlarm(time);
+
+  if(!fetching){
+    addAlaramToDom(time, alarm);
+    saveAlarm(time);
+  }
 }
 
 // Displaying created alarms in HTML
@@ -99,13 +103,29 @@ function addAlaramToDom(time, intervalId) {
   alrarmContainer.prepend(alarm);
 }
 
+// Check save alrams in localstorage
+function checkAlarams() {
+  let alarms = [];
+  const isPresent = localStorage.getItem("alarms");
+  if (isPresent) alarms = JSON.parse(isPresent);
+
+  return alarms;
+}
+
 // save alarm to local storage
 function saveAlarm(time) {
-  const isPresent = localStorage.getItem("alarms");
-  let alarms = [];
-
-  if (isPresent) alarms = JSON.parse(isPresent);
+  const alarms = checkAlarams();  
 
   alarms.push(time);
   localStorage.setItem("alarms", JSON.stringify(alarms));
+}
+
+// Fetch alarms from local storage
+function fetchAlarm() {
+  const alarms = checkAlarams();
+
+  alarms.forEach(time => {
+    addAlaramToDom(time);
+    setAlarm(time, true);
+  });
 }
