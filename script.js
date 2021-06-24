@@ -90,7 +90,7 @@ function setAlarm(time, fetching = false) {
 // Displaying created alarms in HTML
 function addAlaramToDom(time, intervalId) {
   const alarm = document.createElement("div");
-  alarm.classList.add("alarm");
+  alarm.classList.add("alarm", "mb", "d-flex");
   alarm.innerHTML = `
               <div class="time">${time}</div>
               <button class="btn delete-alarm" data-id=${intervalId}>Delete</button>
@@ -130,17 +130,17 @@ function fetchAlarm() {
 // Delete a Alarm
 function deleteAlarm(event, time, intervalId) {
   const self = event.target;
-  
+
   clearInterval(intervalId);
 
   const alarm = self.parentElement;
-  console.log(time)
+  console.log(time);
 
-  deleteAlarmFromLocal(time)
+  deleteAlarmFromLocal(time);
   alarm.remove();
 }
 
-function deleteAlarmFromLocal(time){
+function deleteAlarmFromLocal(time) {
   const alarms = checkAlarams();
 
   const index = alarms.indexOf(time);

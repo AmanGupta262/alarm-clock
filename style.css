@@ -18,11 +18,70 @@ body{
     border: none;
     background-color: inherit;
     cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 5px;
 }
-input{
+select{
+    appearance: none;
     outline: none;
-    border: none;
     background-color: inherit;
-    padding: .5rem 1rem;
+    padding: .5rem;
+    border-radius: 5px;
+    margin-right: 0.3rem;
+    cursor: pointer;
 }
+
+.mb{
+    margin-bottom: 1rem;
+}
+
 /* End GLobal Styles */
+
+.container{
+    min-height: 100Vh;
+    align-items: center;
+    justify-content: center;
+    padding-block: 1rem;
+}
+
+.alarm-clock{
+    padding: 2rem;
+    border: 1px solid black;
+    border-radius: 50px;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 450px;
+}
+
+.current-time{
+    font-size: 2rem;
+}
+
+.alarm-form{
+    justify-content: space-between;
+    width: 100%;
+}
+
+#submit-btn{
+    border: 1px solid darkgrey;
+}
+
+.alarms{
+    width: 100%;
+}
+
+.alarms .title{
+ font-weight: bold;   
+}
+
+.alarm{
+    justify-content: space-between;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: .5rem;
+    align-items: center;
+}
+.alarm .delete-alarm{
+    border: 1px solid crimson;
+}
